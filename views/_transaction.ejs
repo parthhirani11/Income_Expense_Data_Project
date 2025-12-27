@@ -1,0 +1,39 @@
+<div class="list-group-item d-flex justify-content-between align-items- center ">
+    <div>
+            <strong><%= a.type.toUpperCase() %></strong> &nbsp; <% if(a.type === "income") { %>
+            <span style="font-weight:bold; color:green;">+ ₹<%= a.amount %></span>
+            <% } else { %>
+            <span style="font-weight:bold; color: rgb(227, 57, 57)">- ₹<%= a.amount %></span>
+            <% } %>
+
+           
+
+        <div><strong>Recipient: </strong><small class="text-muted"><%= a.person || '-' %></small></div>
+        <div><strong>Category: </strong><small class="text-muted"><%= a.description || '-' %></small></div>
+        <div><strong>tags: </strong><small class="text-muted"><%= a.tags || '-' %></small></div>
+        
+          <div>
+              <label>Attachment file:</label>
+                 <% if (!a.attachment || a.attachment === "No File") { %>
+                <span class="text-muted">No File</span>
+                <% } else { %>
+                <a href="/uploads/<%= a.attachment %>" target="_blank">
+                    View File
+                </a>
+                <% } %>
+            </div>
+
+            <div><small class="text-muted"><%= new Date(a.date).toLocaleString() %></small></div>
+    </div>  
+        <div class="d-flex ">
+            <a class=" edit-btn " href="/account/edit/<%= a._id %>">Edit</a>
+            <form action="/account/delete/<%= a._id %>" method="POST" onsubmit="return confirm('Delete this record?');">
+                <button class=" custom-btn">Delete</button>
+            </form>
+        </div>
+</div>
+
+
+
+
+

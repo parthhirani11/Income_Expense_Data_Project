@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <%- include('partials/head') %>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+
+      <div class="col-md-5">
+        <div class="card p-4">
+          <h3 class="mb-3">Login</h3>
+
+          <% if (typeof error !== 'undefined') { %>
+          <div class="alert alert-danger"><%= error %></div>
+          <% } %>
+
+          <form action="/login" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input class="form-control" type="email" name="email"required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input class="form-control" type="password" name="password"required />
+            </div>
+
+            <button class="btn btn-primary w-100">Login</button>
+          </form>
+          <p class="mt-3">Don't have an account? <a href="/signup">Signup</a></p>
+          <div> <a href="/forgot">Forgot Password?</a></div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

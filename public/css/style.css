@@ -1,0 +1,754 @@
+body {
+background-color: #c6cfd7;
+}
+/* body {
+  margin: 0;
+  padding: 0;
+  height: 1000vh;
+  background: linear-gradient(-45deg, #c4e21a, #b21f1f, #fdbb2d, #0f0c29);
+  background-size: 1000% 1000%;
+  animation: bgAnimation 12s ease infinite;
+}
+
+@keyframes bgAnimation {
+  0% { background-position: 0% 50%;}
+  50% { background-position: 100% 50%;}
+  100% { background-position: 0% 50%;}
+} */
+.summary-box { text-align: center; }
+.card { border-radius: 10px; }
+.list-group-item { border-radius: 8px; margin-bottom: 8px; }
+
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* full screen vertical center */
+}
+#searchBox {
+  width: 250px;
+  margin-bottom: 10px;
+}
+#results p {
+  padding: 6px;
+  border-bottom: 1px solid #ddd;
+}
+.tag {
+  display: inline-flex;
+  /* align-items: center; */
+  background: #030c16;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 5px;
+  /* border-radius: 20px;
+  font-size: 14px; */
+}
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 32px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+
+
+.custom-btn {
+    
+    width: 120px;          /* Set button width */
+    height: 40px;          /* Set button height */
+    border: 2px solid rgb(200, 38, 38); /* Border thickness and color */
+    border-radius: 8px;    /* Rounded corners */
+    text-align: center;
+    background-color: white; /* Background color */
+    color: rgb(200, 38, 38);;          /* Text color */
+    font-size: 16px;       /* Text size */
+    cursor: pointer;       /* Pointer on hover */
+    transition: 0.3s; 
+         /* Smooth hover effect */
+}
+.edit-btn {
+   
+    width: 120px;          /* Set button width */
+    height: 40px; 
+    padding-top: 4px;
+    margin-right: 20px;         /* Set button height */
+    border: 2px solid green; /* Border thickness and color */
+    border-radius: 8px;    /* Rounded corners */
+    text-align: center;
+    background-color: white; /* Background color */
+    color: green;          /* Text color */
+    font-size: 16px;       /* Text size */
+    cursor: pointer;       /* Pointer on hover */
+    transition: 0.3s;      /* Smooth hover effect */
+    text-decoration: none;
+}
+.list-btn {
+   
+    width: 120px;          /* Set button width */
+    height: 40px; 
+    padding-top: 4px;
+    margin-right: 20px;         /* Set button height */
+    border: 2px solid green; /* Border thickness and color */
+    border-radius: 8px;    /* Rounded corners */
+    text-align: center;
+    background-color: white; /* Background color */
+    color: green;          /* Text color */
+    font-size: 16px;       /* Text size */
+    cursor: pointer;       /* Pointer on hover */
+    transition: 0.3s;      /* Smooth hover effect */
+    text-decoration: none;
+}
+.plus-btn {
+  padding: 2px 12px;
+  font-size: 14px;
+  border: 3px solid #3d4e60;
+  background: #787b7f;
+  color: #dfe5eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  height: 39px;
+  margin-top: 2px;
+  
+}
+
+/* Hover effect................................................... */
+.plus-btn:hover {
+  background: #007bff;;
+  color: #e7ebeb;
+  transform: translateY(-2px);
+}
+
+/* Active click effect ...............................................*/
+.plus-btn:active {
+  transform: scale(0.95);
+}
+
+
+.contact {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+  color: #111;
+  font-weight: 700;
+}
+
+.contact p {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Contact Info Styling............................................... */
+.contact-info {
+  text-align: left;
+  background: #f7f7f7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.contact-info strong {
+  color: #000;
+}
+
+/* Form Styling ..................................................................*/
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border 0.3s ease;
+  outline: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #007bff;
+}
+
+.contact-form textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* Button Styling ..........................................*/
+.contact-form button {
+  width: 100%;
+  padding: 14px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #0c0c0c;
+  transform: translateY(-2px);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 15px;
+  }
+  .contact h2 {
+    font-size: 24px;
+  }
+}
+
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* full screen vertical center */
+}
+
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+
+
+/* ABOUT SECTION................................................... */
+.about-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    padding: 20px;
+}
+
+.about-img {
+    width: 400px;
+    height: 400px;
+    /* border-radius: 12px; */
+    object-fit: cover;
+    /* box-shadow: 0 4px 15px rgba(0,0,0,0.2); */
+}
+
+.about-text h2 {
+    margin-bottom: 10px;
+    color: #222427;
+}
+
+.about-text p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #000;
+}
+
+.about-text ul {
+    list-style: none;
+    margin-top: 10px;
+    color: #000;
+}
+
+.about-text ul li {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* CONTACT FORM SECTION................................................. */
+.contact-section {
+    background: white;
+    padding: 40px;
+    margin: 40px auto;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.15);
+}
+
+.contact-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0066ff;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #0066ff;
+    outline: none;
+}
+
+.contact-form button {
+    background: #0066ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    background: #0052cc;
+}
+
+/* FOOTER......................................................... */
+footer {
+    background: #111;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+/* RESPONSIVE................................................. */
+@media screen and (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+/* ............................................................................. */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: #4CAF50; /* change color as you want */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+}
+
+
+.form-input {
+    width: 100%;        /* Full width */
+    height: 45px;       /* Input height */
+    padding: 10px;      /* Space inside input */
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+/* ............................................. */
+/* popup css */
+.animated-add-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 22px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  background: #0d6efd;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+/* Hover Animation */
+.animated-add-btn:hover {
+  transform: scale(1.15) rotate(90deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+/* Button Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+/* Overlay */
+.popup-overlay {
+ display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 3000;
+  padding-top: 30px;
+}
+
+/* Popup Box */
+.popup-box {
+  background: #fff;
+  width: 1000px;
+  max-width: 95%;
+  max-height: 90vh;   /* ⭐ LIMIT HEIGHT */
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;   /* prevent double scroll */
+
+  margin: auto;
+  padding: 20px;
+ 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  animation: fadeIn 0.25s ease-out;
+
+}
+
+/* Header */
+.popup-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BODY → SCROLL HERE */
+.popup-body {
+  padding: 16px;
+  overflow-y: auto;   /* ⭐ SCROLL ENABLED */
+  flex: 1;
+}
+
+/* Footer */
+.popup-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #ddd;
+  text-align: right;
+}
+
+/* Close button */
+.close-btn {
+  float: right;
+  font-size: 26px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  /* position: absolute; */
+  top: 10px;
+  right: 10px;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: red;
+    transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* .............................................. */
+.plus-btnn {
+  padding: 2px 1px;
+  font-size: 15px;
+  border: 3px solid #3d4e60;
+  background: #787b7f;
+  color: #dfe5eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  height: 39px;
+  width: 100px;
+}
+.plus-btnn:hover {
+  background: #3168a3;;
+  color: #e7ebeb;
+  transform: translateY(-2px);
+}
+@keyframes pulse {
+  0%   { transform: scale(1); filter: brightness(1); }
+  50%  { transform: scale(1.03); filter: brightness(1.05); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+.pulse{
+  display:block;
+  border-radius:50%;
+  animation: pulse 2.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce){ .pulse{ animation: none; } }
+
+.plus-btnnx {
+  padding: 2px 12px;
+  font-size: 15px;
+  border: 3px solid #3d4e60;
+  background: #787b7f;
+  color: #dfe5eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  height: 39px;
+  width: 90px;
+}
+.plus-btnnx:hover {
+  background: #3168a3;;
+  color: #e7ebeb;
+  transform: translateY(-2px);
+}
+
+/* suggestion list */
+
+ #suggestionBox {
+  position: absolute;
+  top: 50px;
+  margin-left: 200px;
+  width: 1070px;
+  max-height: 280px;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border: 1px solid #e3e6ea;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  z-index: 1000;
+}
+
+/* Hide when empty */
+#suggestionBox:empty {
+  display: none;
+}
+
+/* ================= SUGGESTION ITEM ================= */
+#suggestionBox .list-group-item {
+  border: none;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover */
+#suggestionBox .list-group-item:hover {
+  background-color: #f0f4ff;
+  color: #1a3cff;
+}
+
+/* Active / selected (keyboard ready) */
+#suggestionBox .list-group-item.active {
+  background-color: #1a3cff;
+  color: #ffffff;
+}
+
+/* ================= OPTIONAL ICON SUPPORT ================= */
+#suggestionBox .list-group-item::before {
+  content: "🔍";
+  margin-right: 10px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+/* ================= SCROLLBAR ================= */
+#suggestionBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+#suggestionBox::-webkit-scrollbar-thumb {
+  background-color: #c9cdd4;
+  border-radius: 10px;
+}
+
+#suggestionBox::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+  /* MAIN FILTER CONTAINER */
+#dynamicInput {
+  width: 100%;
+}
+
+/* MAIN FILTER ROW */
+.main-filter-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* INPUT / SELECT / DATE HOLDER */
+.main-input {
+  flex: 1;
+}
+
+/* REMOVE BUTTON */
+.removeMainInput {
+  /* font-size: 25px;
+  cursor: pointer;
+  color: #333;
+  user-select: none;
+  font-weight: bold; */
+  
+  float: right;
+  font-size: 25.5px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  
+  top: 10px;
+  right: 10px;
+  transition: 0.2s;
+}
+
+.removeMainInput:hover {
+  color: red;
+  transform: scale(1.2);
+}
+
+
+        /* suggestion list */
+
+ #suggestionBox {
+  position: absolute;
+  top: 50px;
+  margin-left: 200px;
+  width: 1070px;
+  max-height: 280px;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border: 1px solid #e3e6ea;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  z-index: 1000;
+}
+
+/* Hide when empty */
+#suggestionBox:empty {
+  display: none;
+}
+
+/* ================= SUGGESTION ITEM ================= */
+#suggestionBox .list-group-item {
+  border: none;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover */
+#suggestionBox .list-group-item:hover {
+  background-color: #f0f4ff;
+  color: #1a3cff;
+}
+
+/* Active / selected (keyboard ready) */
+#suggestionBox .list-group-item.active {
+  background-color: #1a3cff;
+  color: #ffffff;
+}
+
+/* ================= OPTIONAL ICON SUPPORT ================= */
+#suggestionBox .list-group-item::before {
+  content: "🔍";
+  margin-right: 10px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+/* ================= SCROLLBAR ================= */
+#suggestionBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+#suggestionBox::-webkit-scrollbar-thumb {
+  background-color: #c9cdd4;
+  border-radius: 10px;
+}
+
+#suggestionBox::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <%- include('partials/head') %>
+</head>
+<body>
+  
+  <%- include('partials/nav') %>
+  <div class="container">
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <div class="card p-3 summary-box">
+                <h5>Total Income</h5>
+                <h3 style="color:green" >₹<%= totalIncome %></h3>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card p-3 summary-box">
+                <h5>Total  Expense</h5>
+                <h3 style="color:red">₹<%= totalExpense %></h3>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3 summary-box">
+                    <h5>Balance</h5>
+                    <h3 style="color: rgb(59, 14, 151)">₹<%= balance %></h3>
+                </div>
+            </div>
+          </div>
+           
+        
+          <div>
+            <h4 style="color: rgb(33, 27, 38)">Transections.. </h4>
+         
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <select id="exportType" class="form-select border-3" style="width:195px;">
+                  <option value="">Select Export Type</option>
+                  <option value="csv">CSV (.csv)</option>
+                  <option value="xlsx">Excel (.xlsx)</option>
+                  <option value="pdf">PDF (.pdf)</option>
+                </select>
+                <button id="exportBtn" class="plus-btnnx">Export</button>
+              </div>
+            
+            
+              <div class="d-flex align-items-center gap-2 mb-2 position-relative">
+                <div id="filterArea" >
+                    <!-- DEFAULT FILTER (CREATED ON LOAD) -->
+                      <div id="extraFilters"></div>    
+                </div>               
+              </div>
+
+              <div> <button id="addFilterBtn" class="plus-btnn" style="margin-left:1195px;">＋ Add Filter</button></div>
+                <!-- ................................................................. -->
+              <div class="mt-3 p-2 bg-light border rounded">
+                <strong>Total Income: </strong> <span id="totalIncome" style="color:green;font-weight:bold;">₹0</span> |
+                <strong>Total Expense: </strong> <span id="totalExpense" style="color:rgb(216, 27, 27);font-weight:bold;">₹0</span>
+              </div>
+                
+              <div id="results">
+                <% if(accounts && accounts.length){ %>
+                  <% accounts.forEach(a => { %>
+                    <li class="list-group">
+                      <%- include('_transaction', { a }) %>
+                    </li>
+                  <% }) %>
+                  <% } else if(searchKeyword){ %>
+                        <div>No records found for "<%= searchKeyword %>"</div>
+                  <% } %>
+              </div>
+
+          </div>
+
+<!-- ...........................................Pop-Up Btn............................................ -->
+<!-- Floating Add Button -->
+    <button id="openPopupBtn" class="animated-add-btn">＋</button>
+
+<!-- Popup Overlay -->
+<div id="transactionPopup" class="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-header">
+      <h3 class="text-center mb-3">Add Transaction</h3>
+      <span id="closePopup" class="close-btn">&times;</span>
+    </div>
+    <div class="popup-body">
+      <form id="transactionForm" class="center"action="/account/add" method="POST"  enctype="multipart/form-data">
+        <div class="mb-2">
+          <label>Type</label>
+          <select name="type" class="form-select border-2" required>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>            
+        </div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <input class="form-control" name="amount" type="number" step="0.01" placeholder="Amount"required>
+          <input class="form-control" type="text" name="person" placeholder=" Creditor Name (Optional)">
+        </div>
+        
+        <div class="mb-2">      
+          <label>Payment Mode</label>
+          <select class="form-select border-2" id="paymentMode" name="paymentMode">
+            <option value="Cash">Cash Payment</option>
+            <option value="Bank">Bank</option>
+            <option value="UPI">UPI Payment</option>
+          </select>
+        </div>
+
+        <!-- BANK -->     
+        <div id="bankSection" style="display:none;">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <select class="form-select border-2" style="width:220px;" id="bankName" name="bankName">
+              <option value="">Select Bank</option>
+              <option value="SBI">SBI</option>
+              <option value="HDFC">HDFC</option>
+            </select>
+            <button class="plus-btnn" type="button" id="addBankBtn">＋ Add Bank</button>
+            <input class ="form-control "style="width:620px;" name="accountNumber" placeholder="Account Number">
+          </div>
+        </div>
+              
+        <!-- UPI -->
+        <div id="upiSection" style="display:none;">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <select class="form-select border-2" style="width:220px;" name="upiApp">
+              <option value="GPay">Google Pay</option>
+              <option value="PhonePe">PhonePe</option>
+              <option value="Paytm">Paytm</option>
+            </select>
+            <input class ="form-control " style="width:730px;" name="upiId" placeholder="UPI ID / Mobile">
+          </div>
+        </div>
+                
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <input class="form-control" name="description" placeholder="Category">
+          <label>Tags:</label>
+          <input type="text" id="tagInput" name="tags" class="form-control mb-2"placeholder="e.g. groceries, rent" >
+        </div>            
+                  
+        <% if (suggestedTags && suggestedTags.length > 0) { %>
+          <% suggestedTags.forEach(tag => { %>
+            <button type="button" class=" plus-btn tag-btn" data-tag="<%= tag %>"><%= tag %> +</button>
+          <% }) %>
+        <% } else { %>
+          <p class="text-muted">(No suggestions yet — add transactions to generate tags)</p>
+        <% } %>
+                  
+        <div class="mb-2">
+          <label>Attachment (Optional)</label>
+          <input class="form-control" type="file" name="attachment">
+        </div>
+
+        <!-- Selected Tag Badges -->
+        <div id="tagHolder" class="mt-3"></div>
+              
+      </form>
+    </div>
+    <div class="popup-footer">
+      <button type="submit" form="transactionForm" class="btn btn-primary">
+        Add Transaction
+      </button>
+    </div>
+  </div>          
+</div>      
+    
+  <% if(accounts.length > 0) { %>
+    <ul>
+    <% accounts.forEach(a => { %>
+        <li class="list-group">
+          <%- include('_transaction', { a }) %>
+           
+        </li>
+    <% }) %>
+    </ul>
+<% } else { %>
+    <p style="color: gray;">No matching result found.</p>
+<% } %>
+  </div>
+<script src="/js/payment.js"></script>
+<script src="/js/popup.js"></script>
+<script src="/js/search.js"></script> 
+<script src="/js/exportType.js"></script></script>
+
+</body>
+</html> 

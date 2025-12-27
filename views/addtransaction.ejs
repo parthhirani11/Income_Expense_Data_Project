@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  
+  <%- include('partials/nav') %>
+  
+<div class="row container-center">
+      <div class="col-md-6 ">
+          <div class="card p-3 mb-3">
+            <h5>Add Income Expense Data</h5>
+            <form class="center"action="/account/add" method="POST">
+              <div class="mb-2">
+                <label>Type</label>
+                <select name="type" class="form-select" required>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+                
+              </div>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <input class="form-control" name="amount" type="number" step="0.01" placeholder="Amount" required>
+                <input class="form-control" type="text" name="person" placeholder=" Creditor Name (Optional)">
+              </div>
+            
+            
+              <div class="mb-2"><input class="form-control" name="description" placeholder="Category"></div>
+       
+         
+              <div class="mb-2">
+                <label>Tags:</label><input id="tagInput" class="form-control" name="tags" placeholder="e.g. groceries, rent" />
+
+
+                <div class="suggested">
+                  <label>Suggested Tags:</label>
+                      <% if (suggestedTags && suggestedTags.length > 0) { %>
+                      <div id="suggestionHolder">
+                        <% suggestedTags.forEach(tag => { %>
+                          <button type="button" class=" btn btn-sm btn-outline-secondary suggest-btn suggested-tag" data-tag="<%= tag %>"><%= tag %> +</button>
+                        <% }) %>
+                      </div>
+                      <% } else { %>
+                        <p class="muted">(No suggestions yet — add transactions to generate tags)</p>
+                      <% } %>
+                </div>
+          
+              </div>
+                <!-- Selected Tag Badges -->
+              <div id="tagHolder" class="mt-3"></div>
+              <button class="btn btn-primary">Add Transaction </button>
+            </form>
+          </div>
+              
+              
+      </div>
+          
+</div>
+          
+<script>
+// small inline fallback in case JS file not loaded
+(function(){
+  function addClickHandlers(){
+    document.querySelectorAll('.suggested-tag').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+        const tag = btn.dataset.tag;
+        const input = document.getElementById('tagInput');
+        let cur = input.value.trim();
+        if(!cur) input.value = tag;
+        else {
+      // avoid duplicates
+          const arr = cur.split(',').map(s=>s.trim()).filter(Boolean);
+          if(!arr.includes(tag)) arr.push(tag);
+          input.value = arr.join(', ');
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addClickHandlers);
+  else addClickHandlers();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+  
+     <%- include('partials/head') %>
+
+</head>
+<body>
+      <%- include("partials/nav") %>
+    <section class="about-container  ">
+        <img class="pulse" src="/images/contact.png" alt="Image" >
+ 
+        <div>    
+        <form action="/account/contact" method="POST">
+          
+            <input class="form-input"  name="nname" placeholder="Enter your full name" required>
+            <input class="form-input"name="email" placeholder="Enter your email" required>
+            <textarea class="border-3" name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+            <button class="btn btn-primary" type="submit">Send Message</button>
+        </form>
+        </div>
+        
+    </section>
+   
+
+</body>
+</html>

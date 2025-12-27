@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h4>Edit Transaction</h4>
+                    <form  action="/account/edit/<%=  record._id  %>"  method="POST" enctype="multipart/form-data">
+                        <div class="mb-2">
+                            <label class="form-label">Type</label>
+                            <select name="type" class="form-select">'selected' :
+                                <option value="income"%>>Income</option>
+                                <option value="expense" record.type === 'income' record.type === 'expense' 'selected' : '' %>>Expense</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Amount</label>
+                            <input class="form-control" name="amount" type="number" step="0.01" value="<%= record.amount %>" required />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Account holder Name</label>
+                            <input class="form-control" type="text" name="person" value="<%= record.person %>" />
+               
+                        </div>
+                        <label class="form-label">Payment Mode</label>
+                          <select id="paymentMode" name="paymentMode" class="form-select border-2">
+                                <option value="Cash" <%= record.paymentMode==="Cash"?"selected":"" %>>Cash</option>
+                                <option value="Bank" <%= record.paymentMode==="Bank"?"selected":"" %>>Bank</option>
+                                <option value="UPI" <%= record.paymentMode==="UPI"?"selected":"" %>>UPI</option>
+                            </select>
+
+                            <div id="bankSection">
+                                Bank Name :<input class="form-control" name="bankName" value="<%= record.bankDetails?.bankName %>">
+                                Account no. :<input class="form-control" name="accountNumber" value="<%= record.bankDetails?.accountNumber %>">
+                            </div>
+
+                            <div id="upiSection">
+                                UPI App Name:<input class="form-control" name="upiApp" value="<%= record.upiDetails?.appName %>">
+                                UPI ID :<input class="form-control" name="upiId" value="<%= record.upiDetails?.upiId %>">
+                            </div>
+                        <div class="mb-2">
+                            <label class="form-label">Category</label>
+                            <input class="form-control" name="description" value="<%= record.description %>" />
+                        </div>
+                        <div class="mb-2">
+                                 <label>Tags</label>
+                            <input class="form-control" type="text" name="tags" value="<%= record.tags.join(',') %>">
+                        </div>
+                          <!-- SHOW EXISTING FILE -->
+                         <input type="file" name="attachment">
+
+                            <% if (record.attachment) { %>
+                                <p>
+                                Current File:
+                                <a href="/uploads/<%= record.attachment %>" target="_blank">
+                                    <%= record.originalName %>
+                                </a>
+                                </p>
+                            <% } %>
+                
+                        <div>
+                        <button class="btn btn-primary">Save</button>
+                        <a class="btn btn-secondary ms-2" href="dashboard.ejs">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ <script src="/js/payment.js"></script>
+<script>
+  paymentMode.dispatchEvent(new Event("change"));
+</script>
+</body>
+</html>
