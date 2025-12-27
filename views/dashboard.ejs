@@ -116,14 +116,15 @@
               <option value="HDFC">HDFC</option>
             </select>
             <button class="plus-btnn" type="button" id="addBankBtn">＋ Add Bank</button>
-            <input class ="form-control "style="width:620px;" name="accountNumber" placeholder="Account Number">
+            <input class ="form-control "style="width:620px;" name="accountNumber"  placeholder="Account Number" >
           </div>
         </div>
               
         <!-- UPI -->
         <div id="upiSection" style="display:none;">
           <div class="d-flex align-items-center gap-2 mb-2">
-            <select class="form-select border-2" style="width:220px;" name="upiApp">
+            <select class="form-select border-2" style="width:220px;"  name="upiApp" >
+              <option value="">Select UPI</option>
               <option value="GPay">Google Pay</option>
               <option value="PhonePe">PhonePe</option>
               <option value="Paytm">Paytm</option>
@@ -164,7 +165,7 @@
   </div>          
 </div>      
     
-  <% if(accounts.length > 0) { %>
+  <!-- <% if(accounts.length > 0) { %>
     <ul>
     <% accounts.forEach(a => { %>
         <li class="list-group">
@@ -175,7 +176,7 @@
     </ul>
 <% } else { %>
     <p style="color: gray;">No matching result found.</p>
-<% } %>
+<% } %> -->
   </div>
 <script src="/js/payment.js"></script>
 <script src="/js/popup.js"></script>

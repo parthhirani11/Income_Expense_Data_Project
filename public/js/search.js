@@ -340,29 +340,40 @@ function renderPayment(item) {
   }
 
   if (item.paymentMode === "Bank") {
+    const bankName = item.bankDetails?.bankName?.trim();
+    const accNo = item.bankDetails?.accountNumber?.trim();
     return `
-      <span class="badge bg-primary">
-        Bank: ${item.bankDetails?.bankName || "No Bank"}
-      </span>
-      <small class="text-muted">
-        A/C: ${item.bankDetails?.accountNumber || "No A/C"}
-      </small>
-    `;
+    <span class="badge bg-primary">
+      Bank: ${bankName || ""}
+    </span>
+
+    ${
+      accNo
+        ? `<small class="text-muted"><strong>A/C: ${accNo}</strong></small>`
+        : `<small class="text-muted"></small>`
+    }
+  `;
   }
 
   if (item.paymentMode === "UPI") {
-    return `
-      <span class="badge bg-success">
-        UPI: ${item.upiDetails?.appName || "No UPI"}
-      </span>
-      <small class="text-muted">
-         UPI ID: ${item.upiDetails?.upiId || "No Id"}
-      </small>
-    `;
+    const upiId = item.upiDetails?.upiId?.trim();
+   return `
+    <span class="badge bg-success">
+      UPI: ${item.upiDetails?.appName || " "}
+    </span>
+
+    ${
+      upiId
+        ? `<small class="text-muted"><strong>UPI Id: ${upiId}</strong></small>`
+        : `<small class="text-muted"></small>`
+    }
+  `;
   }
 
   return `<span class="text-muted">-</span>`;
 }
+
+
 function render(data) {
  
   const currencySymbol =document.body.dataset.currency || "₹";
