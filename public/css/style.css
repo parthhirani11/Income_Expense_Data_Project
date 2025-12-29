@@ -657,12 +657,7 @@ input:focus, textarea:focus {
 
 /* REMOVE BUTTON */
 .removeMainInput {
-  /* font-size: 25px;
-  cursor: pointer;
-  color: #333;
-  user-select: none;
-  font-weight: bold; */
-  
+
   float: right;
   font-size: 25.5px;
   font-weight: bold;

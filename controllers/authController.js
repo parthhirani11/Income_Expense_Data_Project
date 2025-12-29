@@ -152,10 +152,15 @@ export const sendOtp = async (req, res) => {
 
     // 5️⃣ Send OTP email
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from:  `"Income Expense App" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "Your OTP Code",
-      text: `Your OTP is ${otp}. Valid for 5 minutes.`
+      subject: "Password Reset OTP",
+       html: `
+      <h2>Password Reset</h2>
+      <p>Your OTP is:</p>
+      <h1 style="color:green;">${otp}</h1>
+      <p>This OTP is valid for 5 minutes.</p>
+    `
     });
 
     res.render("forgot", {
@@ -168,30 +173,6 @@ export const sendOtp = async (req, res) => {
     res.status(500).json({ error: "OTP sending failed" });
   }
 };
-// export const sendOtp = async (req, res) => {
-//   const { email } = req.body;
-
-//   // generate OTP as string
-//   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-//   // delete old OTPs
-//   await Otp.deleteMany({ email });
-
-//   // save OTP
-//   await Otp.create({
-//     email,
-//     otp,
-//     expiresAt: new Date(Date.now() + 5 * 60 * 1000) // 5 minutes
-//   });
-
-//   await sendEmail(email, otp);
-
-//   res.render("forgot", {
-//     msg: "OTP sent to your email",
-//     showOtp: true,
-//     email
-//   });
-// };
 
 // VERIFY OTP
 export const verifyOtp = async (req, res) => {

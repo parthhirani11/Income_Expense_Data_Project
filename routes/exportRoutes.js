@@ -119,7 +119,7 @@ router.post('/export/pdf', (req, res) => {
 
         doc.text(index + 1, columnX.sr, y);
         doc.text(t.type, columnX.type, y);
-        doc.text(`Rs. ${t.amount}`, columnX.amount, y);
+        doc.text(`INR  ${t.amount}`, columnX.amount, y);
         doc.text(t.recipient || "-", columnX.recipient, y, { width: 100 });
         doc.text(t.category || "-", columnX.category, y);
         doc.text(t.tags || "-", columnX.tags, y, { width: 80 });

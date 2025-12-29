@@ -190,55 +190,6 @@ export const updateRecord = async (req, res) => {
 };
 
 
-// export const updateRecord = async (req, res) => {
-//   try {
-       
-//     const transaction = await Account.findById(req.params.id);
-//     if (!transaction) return res.send("Transaction not found");
-
-//     transaction.amount = req.body.amount;
-//     transaction.type = req.body.type;
-//     transaction.category = req.body.category;
-//     transaction.paymentMode=req.body.paymentMode;
-//     transaction.bankName=req.body.bankName;
-//     transaction.accountNumber=req.body.accountNumber;
-//     transaction.upiApp=req.body.upiApp;
-//     transaction.upiId=req.body.upiId;
-//     transaction.tags = req.body.tags;
-//     transaction.recipient = req.body.recipient;
-// const data ={
-//    bankDetails: {},
-//     upiDetails: {}
-// }
-//  transaction.data = req.file.data;
-//     // 🚫 DO NOT update transaction.date
-//       if (paymentMode === "Bank") {
-//         data.bankDetails = { bankName, accountNumber };
-//       }
-
-//       if (paymentMode === "UPI") {
-//         data.upiDetails = { appName: upiApp, upiId };
-//       }
-//     if (req.file) {
-//       // ✅ Delete OLD file
-//         if (transaction.attachment) {
-//           const oldPath = path.join("uploads", transaction.attachment);
-//           if (fs.existsSync(oldPath)) {
-//             fs.unlinkSync(oldPath);
-//           }
-//         }
-//       transaction.attachment = req.file.filename;
-//       transaction.originalName = req.file.originalname;
-
-//     }  await transaction.save();
-
-//         res.redirect("/account/dashboard");
-//       } catch (err) {
-//           console.error(err);
-//           res.redirect("/account/dashboard");
-//         }
-// };
-
 export const deleteRecord = async (req, res) => {
   try {
         const { id } = req.params;
@@ -285,21 +236,4 @@ const { nname, email, message } = req.body;
    
 };
 
-// Pass on JSON formet
 
-// export const searchRecords  = async (req, res) => {
-
-//   const keyword = req.query.keyword || "";
-
-//     const records = await Account.find({
-//         $or: [
-//             { type: { $regex: keyword, $options: "i" }},
-//             { person: { $regex: keyword, $options: "i" }},
-//             { description: { $regex: keyword, $options: "i" }},
-//             { tags: { $regex: keyword, $options: "i" }}
-//         ]
-//     }).sort({ date: -1 });
-
-//     res.json(records);
-    
-// };
