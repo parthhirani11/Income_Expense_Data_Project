@@ -270,6 +270,7 @@ background-color: #c6cfd7;
 .about-text p {
     margin-bottom: 15px;
     line-height: 1.6;
+    text-align: justify;
     color: #000;
 }
 

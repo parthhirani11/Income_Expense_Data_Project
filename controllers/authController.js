@@ -48,38 +48,74 @@ export const  contact = async (req, res) => {
 
 export const signupUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) return res.render("signup", { error:"All fields required" });
+    let { name, email, password } = req.body;
 
-const exists = await User.findOne({ email });
-if (exists) return res.render("signup", { error: "Email already registered" });
-
-  const hashed = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, email, password: hashed });
-  req.session.user = { _id: user._id, name: user.name, email: user.email };
-  res.redirect("/account/dashboard");
-    } catch (err) {
-      console.error(err);
-      res.render("signup", { error: "Something went wrong" });
+    if (!name || !email || !password) {
+      return res.render("signup", { error: "All fields required" });
     }
+
+    email = email.toLowerCase();
+
+    const exists = await User.findOne({ email });
+    if (exists) {
+      return res.render("signup", { error: "Email already registered" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword
+    });
+
+    req.session.user = {
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    };
+
+    res.redirect("/account/dashboard");
+  } catch (err) {
+    console.error(err);
+    res.render("signup", { error: "Something went wrong" });
+  }
 };
-
-
 
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) return res.render("login", { error: "All fieldsrequired" });
+    let { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.render("login", { error: "All fields required" });
+    }
+
+    email = email.toLowerCase();
+
     const user = await User.findOne({ email });
-    if (!user) return res.render("login", { error: "Invalid credentials" });
+    if (!user) {
+      return res.render("login", { error: " login Invalid credentials" });
+    }
+
     const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.render("login", { error: "Invalid credentials" });
-    req.session.user = { _id: user._id, name: user.name, email: user.email };
+    console.log("MATCH:", match); // remove after testing
+    console.log("LOGIN PASSWORD:", password);
+console.log("DB PASSWORD:", user.password);
+    if (!match) {
+      return res.render("login", { error: " Paaword Invalid credentials" });
+    }
+
+    req.session.user = {
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    };
+
     res.redirect("/account/dashboard");
   } catch (err) {
-      console.error(err);
-      res.render("login", { error: "Something went wrong" });
-      }
+    console.error(err);
+    res.render("login", { error: "Something went wrong" });
+  }
 };
 
 export const logoutUser = (req, res) => {
