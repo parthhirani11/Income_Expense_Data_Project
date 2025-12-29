@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import Msg from "../models/Msg.js";
 import twilio from "twilio";
 import crypto from "crypto";
-import { sendEmail } from "../utils/sendEmail.js";
+import { transporter } from "../utils/sendEmail.js";
 import Otp from "../models/Otp.js";
 const client = twilio(
   process.env.TWILIO_ACCOUNT_SID,
@@ -129,32 +129,73 @@ export const forgotPage = (req, res) => {
 
 // SEND OTP
 export const sendOtp = async (req, res) => {
-  const { email } = req.body;
+  try {
+    const { email } = req.body;
 
-  // generate OTP as string
-  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    // 1️⃣ Validate email
+    if (!email) {
+      return res.status(400).json({ error: "Email required" });
+    }
 
-  // delete old OTPs
-  await Otp.deleteMany({ email });
+    // 2️⃣ Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-  // save OTP
-  await Otp.create({
-    email,
-    otp,
-    expiresAt: new Date(Date.now() + 5 * 60 * 1000) // 5 minutes
-  });
+    // 3️⃣ Delete old OTPs
+    await Otp.deleteMany({ email });
 
-  await sendEmail(email, otp);
+    // 4️⃣ Save OTP in DB
+    await Otp.create({
+      email,
+      otp,
+      expiresAt: new Date(Date.now() + 5 * 60 * 1000) // 5 minutes
+    });
 
-  res.render("forgot", {
+    // 5️⃣ Send OTP email
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Your OTP Code",
+      text: `Your OTP is ${otp}. Valid for 5 minutes.`
+    });
+
+    res.render("forgot", {
     msg: "OTP sent to your email",
     showOtp: true,
     email
   });
+  } catch (error) {
+    console.error("OTP ERROR:", error);
+    res.status(500).json({ error: "OTP sending failed" });
+  }
 };
+// export const sendOtp = async (req, res) => {
+//   const { email } = req.body;
+
+//   // generate OTP as string
+//   const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+//   // delete old OTPs
+//   await Otp.deleteMany({ email });
+
+//   // save OTP
+//   await Otp.create({
+//     email,
+//     otp,
+//     expiresAt: new Date(Date.now() + 5 * 60 * 1000) // 5 minutes
+//   });
+
+//   await sendEmail(email, otp);
+
+//   res.render("forgot", {
+//     msg: "OTP sent to your email",
+//     showOtp: true,
+//     email
+//   });
+// };
 
 // VERIFY OTP
 export const verifyOtp = async (req, res) => {
+  
   const { email, otp } = req.body;
 
   const record = await Otp.findOne({ email });
@@ -189,7 +230,7 @@ export const verifyOtp = async (req, res) => {
 
   // ✅ FIXED REDIRECT
   res.redirect(`/reset?email=${email}`);
-};
+ };
 
 
 // RESET PASSWORD PAGE
