@@ -98,9 +98,7 @@ export const loginUser = async (req, res) => {
     }
 
     const match = await bcrypt.compare(password, user.password);
-    console.log("MATCH:", match); // remove after testing
-    console.log("LOGIN PASSWORD:", password);
-console.log("DB PASSWORD:", user.password);
+  
     if (!match) {
       return res.render("login", { error: " Paaword Invalid credentials" });
     }
